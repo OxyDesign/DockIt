@@ -1,0 +1,75 @@
+a,abbr,acronym,address,applet,article,aside,audio,b,big,blockquote,body,canvas,caption,center,cite,code,dd,del,details,dfn,div,dl,dt,em,embed,fieldset,figcaption,figure,footer,form,h1,h2,h3,h4,h5,h6,header,hgroup,html,i,iframe,img,ins,kbd,label,legend,li,mark,menu,nav,object,ol,output,p,pre,q,ruby,s,samp,section,small,span,strike,strong,sub,summary,sup,table,tbody,td,tfoot,th,thead,time,tr,tt,u,ul,var,video{margin:0;padding:0;border:0;font:inherit;vertical-align:baseline}article,aside,details,figcaption,figure,footer,header,hgroup,menu,nav,section{display:block}body{line-height:1}ol,ul{list-style:none}blockquote,q{quotes:none}blockquote:after,blockquote:before,q:after,q:before{content:'';content:none}table{border-collapse:collapse;border-spacing:0}
+html,body{overflow-x:hidden;}
+body{
+	font-family: Arial, Helvetica, sans-serif;
+}
+.dockable{
+	background:#f99;
+	min-width:100px;
+	display:inline-block;
+	color:#000;
+	text-align:center;
+	padding:20px;
+	border:5px solid #c00;
+	border-radius:10px;
+	margin:50px 10px;
+	color:#555;
+	font-size: 14px;
+	line-height: 1.5;
+}
+.dockable span{
+	background:#f00;
+	display:block;
+	border-radius:10px;
+	padding:20px 10px;
+}
+.docked{
+	background:#9f9;
+	border-color:#0c0;
+}
+.docked span{
+	background:#0f0;
+}
+.content{
+	background:#ccc;
+	height:500px;
+	text-align: center;
+	color:#fff;
+	padding:10px;
+}
+.content:nth-child(even){
+	background:#888;
+}
+.left{
+	text-align: left;
+}
+.center{
+	text-align: center;
+}
+.right{
+	text-align: right;
+}
+#switch,
+#scroll{
+	position: fixed;
+	bottom:5px;
+	border:1px solid #222;
+	color:#ddd;
+	background:linear-gradient(to bottom, #555 0%,#444 100%);;
+	border-radius: 5px;
+	padding:10px;
+	z-index: 9999;
+	box-shadow: 0 0 1px 1px rgba(0,0,0,0.25);
+	font-size: 14px;
+}
+#switch:hover,
+#scroll{
+	background:linear-gradient(to bottom, #999 0%,#888 100%);;
+}
+#switch{
+	left:5px;
+	cursor: pointer;
+}
+#scroll{
+	right:5px;
+}
