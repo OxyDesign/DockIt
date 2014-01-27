@@ -61,7 +61,7 @@
 			};
 
 			/* Reduce the number of functions triggered on resize & scroll */
-			self.timeWindow = 40;
+			self.timeWindow = 10;
 			self.lastExecutionResize = new Date((new Date()).getTime() - self.timeWindow);
 			self.lastExecutionScroll = new Date((new Date()).getTime() - self.timeWindow);
 
