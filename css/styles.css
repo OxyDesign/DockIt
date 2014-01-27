@@ -199,12 +199,12 @@ h2 span{
 }
 .sticky-note .note{
 	font-family: 'Parisienne', cursive;
-	height:40px;
-	line-height:40px;
+	height:36px;
+	line-height:36px;
 	font-size:24px;
 }
 .sticky-note .info{
-	padding:15px 25px;
+	padding:0 5px 10px;
 	font-size: 12px;
 	text-align:left;
 	line-height: 1.5;

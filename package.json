@@ -1,0 +1,14 @@
+{
+  "name": "dockit",
+  "version": "0.0.0",
+  "dependencies": {
+    "grunt": "latest",
+    "grunt-contrib-concat": "latest",
+    "grunt-contrib-uglify": "latest",
+    "grunt-contrib-watch": "latest",
+    "grunt-contrib-clean": "latest",
+    "grunt-newer": "latest",
+    "nib": "latest",
+    "fluidity" : "latest"
+  }
+}
