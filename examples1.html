@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>DockIt</title>
+	<link href='http://fonts.googleapis.com/css?family=Parisienne' rel='stylesheet' type='text/css'>
+	<link rel="stylesheet" href="css/styles.css" />
+	<link rel="stylesheet" href="css/sticky-note.css" />
+</head>
+<body class="example1">
+	<div>
+		<button id="switch" class="active">Dock / Undock</button>
+		<div id="scroll">Scroll Value : <span></span></div>
+		<div class="content left">
+			<div class="dockable" id="dockable1"><div class="sticky-note"><div class="sticky-bg"></div><div><div class="sticky-content"><span class="note">note</span><span class="info">scrollDown : true</span><span class="date">01/01/2014</span></div></div></div></div>
+		</div>
+		<div class="content center">
+			<div class="dockable" id="dockable2"><div class="sticky-note"><div class="sticky-bg"></div><div><div class="sticky-content"><span class="note">note</span><span class="info">scrollDown : true,<br />scrollUp : true</span><span class="date">01/01/2014</span></div></div></div></div>
+		</div>
+		<div class="content right">
+			<div class="dockable" id="dockable3"><div class="sticky-note"><div class="sticky-bg"></div><div><div class="sticky-content"><span class="note">note</span><span class="info">scrollUp : true</span><span class="date">01/01/2014</span></div></div></div></div>
+		</div>
+	</div>
+
+	<script src="lib/zepto/zepto.min.js"></script>
+	<script src="lib/zepto-data/zepto.data.min.js"></script>
+	<!--<script src="lib/jquery/jquery.min.js"></script>-->
+	<script src="js/dockit.js"></script>
+	<script>
+		$(document).ready(function(){
+			$("#dockable3").dockIt({scrollUp:true});
+			$("#dockable2").dockIt({scrollDown:true,scrollUp:true});
+			$("#dockable1").dockIt({scrollDown:true});
+
+			$(window).on({
+				'scroll': function(){
+					$("#scroll span").html($(window).scrollTop());
+				}
+			});
+
+			$("#switch").click(function(){
+				if(!$(".dockable").eq(0).data('dockAlive')){
+					$(this).addClass('active');
+					$(".dockable").dockIt('initDock');
+				}else{
+					$(this).removeClass('active');
+					$(".dockable").dockIt('stopDock');
+				}
+			});
+		});
+	</script>
+</body>
+</html>

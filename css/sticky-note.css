@@ -1,0 +1,76 @@
+.sticky-note{
+	position:relative;
+	display:inline-block;
+	min-width:30px;
+	min-height:30px;
+	padding:10px;
+	overflow:hidden;
+	text-align:center;
+	-webkit-box-shadow: -4px -4px 18px -6px rgba(0, 0, 0, 0.25);
+	   -moz-box-shadow: -4px -4px 18px -6px rgba(0, 0, 0, 0.25);
+	        box-shadow: -4px -4px 18px -6px rgba(0, 0, 0, 0.25);
+}
+.sticky-note:before,
+.sticky-note:after,
+.sticky-note .before,
+.sticky-note .after{
+	content:'';
+	position:absolute;
+	display:block;
+	bottom:0;
+	right:0;
+	width:0;
+	height:0;
+	border-style: solid;
+	-webkit-backface-visibility:hidden;
+	-webkit-transform:rotate(45deg);
+	   -moz-transform:rotate(45deg);
+	    -ms-transform:rotate(45deg);
+	     -o-transform:rotate(45deg);
+	        transform:rotate(45deg);
+	margin:0 5px 5px 0;
+}
+.sticky-note:before,
+.sticky-note .before{
+	border-width:11px;
+	border-color:transparent #000 transparent transparent;
+	z-index: 99;
+	opacity: 0.05;
+}
+.sticky-note:after,
+.sticky-note .after{
+	border-width:10px;
+	border-color:transparent #ffd200 transparent transparent;
+	z-index: 100;
+}
+.sticky-bg{
+	position:absolute;
+	width:1000px;
+	height:1000px;
+	right:-138px;
+	bottom:-138px;
+	z-index: 1;
+	background: #ffd200;
+	background: -webkit-gradient(linear, left top, right top, color-stop(0%,#ffd200), color-stop(90%,#ffd200), color-stop(100%,#ffba00));
+	background: -webkit-linear-gradient(left,  #ffd200 0%,#ffd200 90%,#ffba00 100%);
+	background:    -moz-linear-gradient(left,  #ffd200 0%,#ffd200 90%,#ffba00 100%);
+	background:     -ms-linear-gradient(left,  #ffd200 0%,#ffd200 90%,#ffba00 100%);
+	background:      -o-linear-gradient(left,  #ffd200 0%,#ffd200 90%,#ffba00 100%);
+	background:         linear-gradient(to right,  #ffd200 0%,#ffd200 90%,#ffba00 100%);
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffd200', endColorstr='#ffba00',GradientType=1 );
+	-webkit-backface-visibility:hidden;
+	-webkit-transform:rotate(45deg);
+	   -moz-transform:rotate(45deg);
+	    -ms-transform:rotate(45deg);
+	     -o-transform:rotate(45deg);
+	        transform:rotate(45deg);
+	-webkit-box-shadow: 2px 0px 5px 0px rgba(0,0,0,0.2);
+	   -moz-box-shadow: 2px 0px 5px 0px rgba(0,0,0,0.2);
+	        box-shadow: 2px 0px 5px 0px rgba(0,0,0,0.2);
+}
+.sticky-content{
+	position:relative;
+	z-index: 50;
+	color:#222;
+}
+

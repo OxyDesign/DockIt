@@ -1,0 +1,165 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<title>DockIt</title>
+	<link href='http://fonts.googleapis.com/css?family=Parisienne' rel='stylesheet' type='text/css'>
+	<link rel="stylesheet" href="css/styles.css" />
+	<link rel="stylesheet" href="css/sticky-note.css" />
+</head>
+
+<body class="main">
+	<div>
+		<div class="content left">
+			<div class="dockable first" id="dockable1">
+				<div class="sticky-note">
+					<div class="sticky-bg"></div>
+					<div>
+						<div class="sticky-content">
+							<span class="note">note</span>
+							<span class="date">01/01/2014</span>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="dockable second" id="dockable2">
+				<div class="sticky-note">
+					<div class="sticky-bg"></div>
+					<div>
+						<div class="sticky-content">
+							<span class="note">note</span>
+							<span class="date">01/01/2014</span>
+						</div>
+					</div>
+				</div>
+			</div>
+			<h1>DockIt Plugin for Zepto or jQuery</h1>
+		</div>
+		<h2>Examples 1</h2>
+		<div class="content frame">
+			<iframe src="examples1.html" border="0"></iframe>
+		</div>
+		<h2>Examples 2</h2>
+		<div class="content frame">
+			<iframe src="examples2.html" border="0"></iframe>
+		</div>
+		<h2>Examples 3</h2>
+		<div class="content frame">
+			<iframe src="examples3.html" border="0"></iframe>
+		</div>
+		<h2>Config <span>: requires Zepto (+ Module Data) or jQuery</span></h2>
+		<div class="content center">
+			<table class="config">
+				<thead>
+					<tr>
+						<td class="key">Key</td>
+						<td class="value">Default value</td>
+						<td class="type">Type</td>
+						<td class="use">Use</td>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td class="key">scrollDown</td>
+						<td class="value">false</td>
+						<td class="type">boolean</td>
+						<td class="use">Dock when the element goes out by top</td>
+					</tr>
+					<tr>
+						<td class="key">scrollUp</td>
+						<td class="value">false</td>
+						<td class="type">boolean</td>
+						<td class="use">Dock when the element goes out by bottom</td>
+					</tr>
+					<tr>
+						<td class="key">dockToTopFrom</td>
+						<td class="value">false</td>
+						<td class="type">number</td>
+						<td class="use">Dock to top when this value (in px) is reached by scroll</td>
+					</tr>
+					<tr>
+						<td class="key">dockToBottomFrom</td>
+						<td class="value">false</td>
+						<td class="type">number</td>
+						<td class="use">Dock to bottom when this value (in px) is reached by scroll</td>
+					</tr>
+					<tr>
+						<td class="key">stopDockFrom</td>
+						<td class="value">false</td>
+						<td class="type">number</td>
+						<td class="use">Stop docking when the scroll is equal to this value (in px) or more</td>
+					</tr>
+					<tr>
+						<td class="key">stopDockBefore</td>
+						<td class="value">false</td>
+						<td class="type">number</td>
+						<td class="use">Stop docking when the scroll is equal to this value (in px) or less</td>
+					</tr>
+					<tr>
+						<td class="key">marginT</td>
+						<td class="value">10</td>
+						<td class="type">number</td>
+						<td class="use">Margin to add on top before docking (on scrollDown)</td>
+					</tr>
+					<tr>
+						<td class="key">marginB</td>
+						<td class="value">10</td>
+						<td class="type">number</td>
+						<td class="use">Margin to add on bottom before docking (on scrollUp)</td>
+					</tr>
+					<tr>
+						<td class="key">dockedClass</td>
+						<td class="value">'docked'</td>
+						<td class="type">string</td>
+						<td class="use">Class name added to the element when is docked</td>
+					</tr>
+					<tr>
+						<td class="key">zIndex</td>
+						<td class="value">'auto'</td>
+						<td class="type">number</td>
+						<td class="use">Z-index added to the element when is docked</td>
+					</tr>
+					<tr>
+						<td class="key">onInit</td>
+						<td class="value">false</td>
+						<td class="type">function</td>
+						<td class="use">Function invoked when the Plugin is turned on</td>
+					</tr>
+					<tr>
+						<td class="key">onStop</td>
+						<td class="value">false</td>
+						<td class="type">function</td>
+						<td class="use">Function invoked when the Plugin is turned off</td>
+					</tr>
+					<tr>
+						<td class="key">onDock</td>
+						<td class="value">false</td>
+						<td class="type">function</td>
+						<td class="use">Function invoked when the element is docked</td>
+					</tr>
+					<tr>
+						<td class="key">onUndock</td>
+						<td class="value">false</td>
+						<td class="type">function</td>
+						<td class="use">Function invoked when the element is undocked</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
+
+	<script src="lib/zepto/zepto.min.js"></script>
+	<script src="lib/zepto-data/zepto.data.min.js"></script>
+	<!--<script src="lib/jquery/jquery.min.js"></script>-->
+	<script src="js/dockit.js"></script>
+	<script>
+	$(document).ready(function() {
+		$("#dockable1, #dockable2").dockIt({
+			zIndex: 1000
+		});
+	});
+	</script>
+</body>
+
+</html>
