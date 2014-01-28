@@ -2,7 +2,8 @@
  * DockIt v1.0.0
  * January 2014
  * Zepto and jQuery Plugin to dock (or stick) any content with advanced options
- * Author : Escoffier Nicolas - @OxyDesign
+ * Copyright (c) 2014 Nicolas Escoffier
+ * @OxyDesign
  */
 (function($) {
 	'use strict';
