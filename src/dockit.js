@@ -1,7 +1,8 @@
 /**
- * DockIt
- *
- * Zepto and jQuery Plugin to dock / stick any content with advanced options.
+ * DockIt v1.0.0
+ * January 2014
+ * Zepto and jQuery Plugin to dock (or stick) any content with advanced options
+ * Author : Escoffier Nicolas - @OxyDesign
  */
 (function($) {
 	'use strict';
@@ -21,23 +22,23 @@
 		$[pluginName] = function(elt, opts) {
 			var self = this,
 				defaults = {
-					scrollDown: false,				// boolean						|	Dock when the element goes out by top
-					scrollUp: false,				// boolean						|	Dock when the element goes out by bottom
-					dockToTopFrom: false,			// number						|	Dock to top when this value (in px) is reached by scroll
-					dockToBottomFrom: false,		// number						|	Dock to bottom when this value (in px) is reached by scroll
-					stopDockFrom: false,			// number						|	Stop docking when the scroll is equal to this value (in px) or more
-					stopDockBefore: false,			// number						|	Stop docking when the scroll is equal to this value (in px) or less
-					marginT: 10,					// number						|	Margin to add on top before docking (on scrollDown)
-					marginB: 10,					// number						|	Margin to add on bottom before docking (on scrollUp)
-					dockedClass: 'docked',			// string						|	Class name added to the element when is docked
-					zIndex: 'auto',					// number or string 'auto'		|	Z-index added to the element when is docked
-					onInit: false,					// function						|	Function invoked when the Plugin is turned on
-					onStop: false,					// function						|	Function invoked when the Plugin is turned off
-					onDock: false,					// function						|	Function invoked when the element is docked
-					onUndock: false					// function						|	Function invoked when the element is undocked
+					scrollDown: false, //           boolean                     |  Dock when the element goes out by top
+					scrollUp: false, //             boolean                     |  Dock when the element goes out by bottom
+					dockToTopFrom: false, //        number                      |  Dock to top when this value (in px) is reached by scroll
+					dockToBottomFrom: false, //     number                      |  Dock to bottom when this value (in px) is reached by scroll
+					stopDockFrom: false, //         number                      |  Stop docking when the scroll is equal to this value (in px) or more
+					stopDockBefore: false, //       number                      |  Stop docking when the scroll is equal to this value (in px) or less
+					marginT: 10, //                 number                      |  Margin to add on top before docking (on scrollDown)
+					marginB: 10, //                 number                      |  Margin to add on bottom before docking (on scrollUp)
+					dockedClass: 'docked', //       string                      |  Class name added to the element when is docked
+					zIndex: 'auto', //              number or string 'auto'     |  Z-index added to the element when is docked
+					onInit: false, //               function                    |  Function invoked when the Plugin is turned on
+					onStop: false, //               function                    |  Function invoked when the Plugin is turned off
+					onDock: false, //               function                    |  Function invoked when the element is docked
+					onUndock: false //              function                    |  Function invoked when the element is undocked
 				};
 
-			self.opts = $.extend(defaults, opts);
+			self.opts = $.extend({}, defaults, opts);
 
 			!self.opts.scrollDown && !self.opts.scrollUp && !self.opts.dockToTopFrom && !self.opts.dockToBottomFrom && (self.opts.scrollDown = true);
 
@@ -79,7 +80,7 @@
 			initDock: function() {
 				var self = this;
 
-				if (self.stElt.data('dockAlive')) return;
+				if (self.stElt.data(pluginName + 'Alive')) return;
 
 				self.onResizeContext = function() {
 					self.onResize();
@@ -92,7 +93,7 @@
 
 				self.windowHeight = $w.height();
 
-				self.stElt.data('dockAlive', true);
+				self.stElt.data(pluginName + 'Alive', true);
 				self.stElt.after(self.stEltClone);
 				self.onScroll();
 				$w.on({
@@ -108,9 +109,9 @@
 			stopDock: function() {
 				var self = this;
 
-				if (!self.stElt.data('dockAlive')) return;
+				if (!self.stElt.data(pluginName + 'Alive')) return;
 
-				self.stElt.data('dockAlive', false).removeClass(self.opts.dockedClass);
+				self.stElt.data(pluginName + 'Alive', false).removeClass(self.opts.dockedClass);
 				self.stEltClone.remove();
 				self.dockCss();
 				$w.off({
