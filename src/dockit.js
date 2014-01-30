@@ -1,5 +1,5 @@
 /**
- * DockIt v1.0.0
+ * DockIt v1.0.1
  * January 2014
  * Zepto and jQuery Plugin to dock (or stick) any content with advanced options
  * Copyright (c) 2014 Nicolas Escoffier
@@ -46,21 +46,10 @@
 			self.touch = 'ontouchstart' in document.documentElement;
 
 			/* Element to dock */
-			self.stElt = $(elt);
+			self.dockElt = $(elt);
 
 			/* Clone to keep the space when the element is docked */
-			self.stEltClone = self.stElt.clone().css('visibility', 'hidden').hide();
-
-			/* Initial values to reinitialise the element when is undocked */
-			self.initialConfig = {
-				'position': self.stElt.css('position'),
-				'top': self.stElt.css('top'),
-				'right': self.stElt.css('right'),
-				'bottom': self.stElt.css('bottom'),
-				'left': self.stElt.css('left'),
-				'margin': self.stElt.css('margin'),
-				'z-index': self.stElt.css('z-index')
-			};
+			self.dockEltClone = self.dockElt.clone().css('visibility', 'hidden');
 
 			/* Reduce the number of functions triggered on resize & scroll */
 			self.timeWindow = 10;
@@ -81,7 +70,7 @@
 			initDock: function() {
 				var self = this;
 
-				if (self.stElt.data(pluginName + 'Alive')) return;
+				if (self.dockElt.data(pluginName + 'Alive')) return;
 
 				self.onResizeContext = function() {
 					self.onResize();
@@ -90,18 +79,16 @@
 					self.onScroll();
 				};
 
-				self.setDC();
-
-				self.windowHeight = $w.height();
-
-				self.stElt.data(pluginName + 'Alive', true);
-				self.stElt.after(self.stEltClone);
+				self.dockElt.data(pluginName + 'Alive', true);
+				self.dockElt.after(self.dockEltClone.hide());
+				self.setConfig();
 				self.onScroll();
 				$w.on({
 					'resize': self.onResizeContext,
 					'scroll': self.onScrollContext
 				});
 				self.touch && $w.on('touchmove', self.onScrollContext);
+
 				typeof self.opts.onInit === 'function' && self.opts.onInit();
 			},
 			/**
@@ -110,16 +97,17 @@
 			stopDock: function() {
 				var self = this;
 
-				if (!self.stElt.data(pluginName + 'Alive')) return;
+				if (!self.dockElt.data(pluginName + 'Alive')) return;
 
-				self.stElt.data(pluginName + 'Alive', false).removeClass(self.opts.dockedClass);
-				self.stEltClone.remove();
-				self.dockCss();
 				$w.off({
 					'resize': self.onResizeContext,
 					'scroll': self.onScrollContext
 				});
 				self.touch && $w.off('touchmove', self.onScrollContext);
+				self.dockElt.data(pluginName + 'Alive', false).removeClass(self.opts.dockedClass);
+				self.setConfig();
+				self.dockCss();
+				self.dockEltClone.remove();
 				typeof self.opts.onStop === 'function' && self.opts.onStop();
 			},
 
@@ -132,35 +120,63 @@
 					scrollDownType = type === 'scrollDown';
 
 				if (type) {
-					self.stElt.css({
+					self.dockElt.css({
 						'position': 'fixed',
-						'left': self.dynamicConfig.stEltL,
-						'right': 'auto',
 						'top': scrollDownType ? self.opts.marginT : 'auto',
+						'right': 'auto',
 						'bottom': scrollDownType ? 'auto' : self.opts.marginB,
+						'left': self.calcConfig.dockEltL,
+						'height': self.calcConfig.dockEltH,
+						'width': self.calcConfig.dockEltW,
 						'margin': 0,
 						'z-index': self.opts.zIndex
 					}).addClass(self.opts.dockedClass);
-					self.stEltClone.show();
+					self.dockEltClone.show();
 					typeof self.opts.onUndock === 'function' && self.opts.onUndock();
 				} else {
-					self.stElt.css(self.initialConfig).removeClass(self.opts.dockedClass);
-					self.stEltClone.hide();
+					self.dockElt.css(self.cssConfig).removeClass(self.opts.dockedClass);
+					self.dockEltClone.hide();
 					typeof self.opts.onDock === 'function' && self.opts.onDock();
 				}
 			},
 			/**
 			 * Method to reset the values (position & size) - On init or resize
 			 */
-			setDC: function() {
-				var self = this;
-				self.dynamicConfig = {
-					stEltL: self.stElt.offset().left,
-					stEltT: self.stElt.offset().top,
-					stEltH: self.stElt.height(),
-					stEltW: self.stElt.width(),
-					stEltB: self.stElt.offset().top + self.stElt.height()
+			setConfig: function() {
+				var self = this,
+					cloneHidden = self.dockEltClone.css('display') === 'none';
+
+				if (cloneHidden) {
+					self.dockEltClone.show();
+					self.dockElt.hide();
+				}
+
+				self.windowHeight = $w.height();
+
+				self.cssConfig = {
+					'position': self.dockEltClone.css('position'),
+					'top': self.dockEltClone.css('top'),
+					'right': self.dockEltClone.css('right'),
+					'bottom': self.dockEltClone.css('bottom'),
+					'left': self.dockEltClone.css('left'),
+					'height': self.dockEltClone.css('height'),
+					'width': self.dockEltClone.css('left'),
+					'margin': self.dockEltClone.css('margin'),
+					'z-index': self.dockEltClone.css('z-index')
 				};
+
+				self.calcConfig = {
+					dockEltL: self.dockEltClone.offset().left,
+					dockEltT: self.dockEltClone.offset().top,
+					dockEltH: self.dockEltClone.height(),
+					dockEltW: self.dockEltClone.width(),
+					dockEltB: self.dockEltClone.offset().top + self.dockEltClone.height()
+				};
+
+				if (cloneHidden) {
+					self.dockEltClone.hide();
+					self.dockElt.show();
+				}
 			},
 
 			/**
@@ -176,9 +192,9 @@
 
 					if ((self.opts.stopDockFrom !== false && windowScroll >= self.opts.stopDockFrom) || (self.opts.stopDockBefore !== false && windowScroll <= self.opts.stopDockBefore)) {
 						self.dockCss();
-					} else if ((self.opts.dockToTopFrom !== false && windowScroll >= self.opts.dockToTopFrom) || (self.opts.scrollDown && (windowScroll > (self.dynamicConfig.stEltT - self.opts.marginT)))) {
+					} else if ((self.opts.dockToTopFrom !== false && windowScroll >= self.opts.dockToTopFrom) || (self.opts.scrollDown && (windowScroll > (self.calcConfig.dockEltT - self.opts.marginT)))) {
 						self.dockCss('scrollDown');
-					} else if ((self.opts.dockToBottomFrom !== false && windowScroll >= self.opts.dockToBottomFrom) || (self.opts.scrollUp && (windowBottom < (self.dynamicConfig.stEltB + self.opts.marginB)))) {
+					} else if ((self.opts.dockToBottomFrom !== false && windowScroll >= self.opts.dockToBottomFrom) || (self.opts.scrollUp && (windowBottom < (self.calcConfig.dockEltB + self.opts.marginB)))) {
 						self.dockCss('scrollUp');
 					} else {
 						self.dockCss();
@@ -203,9 +219,7 @@
 				var self = this;
 
 				var onResize = function() {
-					self.windowHeight = $w.height();
-					self.dockCss();
-					self.setDC();
+					self.setConfig();
 					self.onScroll();
 				};
 

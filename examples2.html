@@ -25,6 +25,8 @@
 	<script src="dockit.min.js"></script>
 	<script>
 		$(document).ready(function(){
+			var dockables = $(".dockable");
+
 			$("#dockable1").dockIt({dockToBottomFrom:300});
 			$("#dockable2").dockIt({dockToTopFrom:300});
 
@@ -35,12 +37,12 @@
 			});
 
 			$("#switch").click(function(){
-				if(!$(".dockable").eq(0).data('dockItAlive')){
+				if(!dockables.eq(0).data('dockItAlive')){
 					$(this).addClass('active');
-					$(".dockable").dockIt('initDock');
+					dockables.dockIt('initDock');
 				}else{
 					$(this).removeClass('active');
-					$(".dockable").dockIt('stopDock');
+					dockables.dockIt('stopDock');
 				}
 			});
 		});

@@ -28,6 +28,8 @@
 	<script src="dockit.min.js"></script>
 	<script>
 		$(document).ready(function(){
+			var dockables = $(".dockable");
+			
 			$("#dockable3").dockIt({scrollUp:true});
 			$("#dockable2").dockIt({scrollDown:true,scrollUp:true});
 			$("#dockable1").dockIt({scrollDown:true});
@@ -39,12 +41,14 @@
 			});
 
 			$("#switch").click(function(){
-				if(!$(".dockable").eq(0).data('dockItAlive')){
+				if(!dockables.eq(0).data('dockItAlive')){
+					console.log('-----init');
 					$(this).addClass('active');
-					$(".dockable").dockIt('initDock');
+					dockables.dockIt('initDock');
 				}else{
+					console.log('-----stop');
 					$(this).removeClass('active');
-					$(".dockable").dockIt('stopDock');
+					dockables.dockIt('stopDock');
 				}
 			});
 		});
