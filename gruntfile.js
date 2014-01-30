@@ -18,13 +18,10 @@ module.exports = function(grunt) {
           'src/*.js'
         ]
       , tasks: [
-          'uglify'
+          'newer:uglify'
         ]
       , options : {
-          spawn : false,
-          livereload: {
-            port: 9000
-          }
+          spawn : false
         }
       }
     }
