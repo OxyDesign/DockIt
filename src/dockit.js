@@ -1,5 +1,5 @@
 /**
- * DockIt v1.0.1
+ * DockIt v1.0.2
  * January 2014
  * Zepto and jQuery Plugin to dock (or stick) any content with advanced options
  * Copyright (c) 2014 Nicolas Escoffier
@@ -160,7 +160,7 @@
 					'bottom': self.dockEltClone.css('bottom'),
 					'left': self.dockEltClone.css('left'),
 					'height': self.dockEltClone.css('height'),
-					'width': self.dockEltClone.css('left'),
+					'width': self.dockEltClone.css('width'),
 					'margin': self.dockEltClone.css('margin'),
 					'z-index': self.dockEltClone.css('z-index')
 				};
