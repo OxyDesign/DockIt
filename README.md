@@ -3,6 +3,11 @@ DockIt
 
 Zepto and jQuery Plugin to dock / stick any content with advanced options
 
+Demo :
+---------
+
+[GH Page](http://oxydesign.github.io/DockIt/)
+
 Options :
 ---------
 
