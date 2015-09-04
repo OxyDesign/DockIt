@@ -90,6 +90,12 @@ h2 span{
 	margin:0 auto 20px auto;
 	max-width: 750px;
 }
+.link a{
+	color:#66994c;
+	text-decoration: none;
+	display:block;
+	padding:10px 0;
+}
 .frame iframe{
 	display:block;
 	width:100%;
